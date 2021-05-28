@@ -6,7 +6,7 @@
 void render(VecPoint cam, VecPoint normal, VecPoint up, double screen, double limit, double alpha, int width, int height, VecPoint light, std::vector<Shape*>& objects) {
 	VecPoint sideways, start;
 	double pixel_size;
-	double screen_height = screen * sin(alpha);
+	double screen_height = 2*(screen * tan(alpha/2));
 	double screen_width = screen_height * width / height;
 	pixel_size = screen_height / height;
 	screen_width = static_cast<double>(width) * pixel_size;
@@ -21,7 +21,7 @@ void render(VecPoint cam, VecPoint normal, VecPoint up, double screen, double li
 	using namespace cimg_library;
 
 	CImg<unsigned char> image(width, height, 1, 3, 0);
-	VecPoint Ntmp, N, V, L;
+	VecPoint Ntmp, N, L;
 	VecPoint ray_begin = cam;
 	VecPoint ray_direction;
 	Shape* obj=nullptr;
@@ -33,9 +33,7 @@ void render(VecPoint cam, VecPoint normal, VecPoint up, double screen, double li
 	for (int j = 0; j < height; j++) {
 		for (int i = 0; i < width; i++) {
 			ray_direction = start - sideways * (pixel_size * i) - up * (pixel_size * j);
-			V = ray_direction * (-1);
 			ray_direction = ray_direction * (1 / screen);
-			V = V * (1 / V.lenght());
 			tmin = std::numeric_limits<double>::max();
 			for (int k = 0; k < objects.size(); k++) {
 				if (objects[k]->intersect(ray_begin, ray_direction,t,Ntmp,screen,limit)) {//Надо еще лимит в интерсект добавить 
