@@ -11,7 +11,7 @@ public:
 		color[1] = 255;
 		color[2] = 0;
 	}
-	bool intersect(VecPoint ray_begin, VecPoint ray_direct, VecPoint& normal, double& t) override {
+	bool intersect(VecPoint ray_begin, VecPoint ray_direct, double& t, VecPoint& normal, double screen, double limit) override {
 		double t_near = DBL_MIN;
 		double t_far = DBL_MAX;
 		double t1, t2;

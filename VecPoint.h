@@ -1,8 +1,10 @@
 #pragma once
+#include<cmath>
+#include<vector>
 struct VecPoint {
-	double x;
-	double y;
-	double z;
+	double x = 0;
+	double y = 0;
+	double z = 0;
 	double& operator[](int i) {
 		switch (i)
 		{
@@ -16,11 +18,11 @@ struct VecPoint {
 			break;
 		}
 	}
-	VecPoint operator*(double f){
+	VecPoint operator*(double f) {
 		VecPoint s;
-		s.x = f*x;
-		s.y = f*y;
-		s.z = f*z;
+		s.x = f * x;
+		s.y = f * y;
+		s.z = f * z;
 		return s;
 	}
 	VecPoint operator+(const VecPoint& f) {
@@ -37,6 +39,10 @@ struct VecPoint {
 		s.z = f.z - z;
 		return s;
 	}
-
+	double lenght() {
+		return std::sqrt(x * x + y * y + z * z);
+	}
+	double operator*(const VecPoint& a) {
+		return x * a.x + y * a.y + z * a.z;
+	}
 };
-
