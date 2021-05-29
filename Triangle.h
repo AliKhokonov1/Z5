@@ -23,14 +23,16 @@ public:
         dett = (p0 - b).x * (p0 - p1).y * (p0 - p2).z + (p0 - p1).x * (p0 - p2).y * (p0 - b).z + (p0 - p2).x * (p0 - b).y * (p0 - p1).z - (p0 - p2).x * (p0 - p1).y * (p0 - b).z - (p0 - p1).x * (p0 - b).y * (p0 - p2).z - (p0 - b).x * (p0 - p2).y * (p0 - p1).z;
         detu = d.x * (p0 - b).y * (p0 - p2).z + (p0 - b).x * (p0 - p2).y * d.z + (p0 - p2).x * d.y * (p0 - b).z - (p0 - p2).x * (p0 - b).y * d.z - (p0 - b).x * d.y * (p0 - p2).z - d.x * (p0 - p2).y * (p0 - b).z;
         detv = d.x * (p0 - p1).y * (p0 - b).z + (p0 - p1).x * (p0 - b).y * d.z + (p0 - b).x * d.y * (p0 - p1).z - (p0 - b).x * (p0 - p1).y * d.z - (p0 - p1).x * d.y * (p0 - b).z - d.x * (p0 - b).y * (p0 - p1).z;
-        if (det < eps) {
+        if (fabs(det) < eps) {
             return false;
         }
         u = detu / det;
+        //printf("u=%lf\n", u);
         if (u < 0.0 || u > 1.0) {
             return false;
         }
         v = detv / det;
+        //printf("v=%lf\n", v);
         if (v < 0.0 || u + v > 1.0) {
             return false;
         }

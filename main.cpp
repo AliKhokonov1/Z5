@@ -4,6 +4,11 @@
 #include "Shape.h"
 #include "Triangle.h"
 #include "Tetrahedron.h"
+#include "Box.h"
+#include "Sphere.h"
+#include "Shape.h"
+#include "Triangle.h"
+#include "Tetrahedron.h"
 #include "iostream"
 
 #include <vector>
@@ -17,11 +22,11 @@ int main() {
 	VecPoint norm = { 1,0,0 };
 	VecPoint up = { 0,0,1 };
 	VecPoint light = { 120,30,50 };
-	Sphere sphr(100, { 600,0,0 });
-	Tetrahedron tetr({ 200,-360,360 }, { 220,-470,400 }, {255,-568,470 }, { 210,-610,550 });
+	//Sphere sphr(100, { 600,0,0 });
+	Tetrahedron tetr({ 200,-36,36 }, { 220,-47,40 }, {250,-56,47 }, { 210,-61,55 });
 	std::vector<Shape*> obj;
 	obj.push_back(&box);
-	obj.push_back(&sphr);
+	//obj.push_back(&sphr);
 	obj.push_back(&tetr);
 	render(cam, norm, up, 150.0, 2000.0, 1.5, 640, 480, light, obj);
 	return 0;

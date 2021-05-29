@@ -58,7 +58,12 @@ public:
 			}
 		}
 		if (t_near <= t_far && t_far >= 0) {
-			t = t_near;
+			if (t_near < 0) {
+				t = t_far;
+			}
+			else {
+				t = t_near;
+			}
 			normal = N;
 			if (ray_direct * normal > 0) {
 				normal = normal * (-1);

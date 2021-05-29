@@ -24,7 +24,7 @@ public:
 		double tmin = DBL_MAX;
 		for (int i = 0; i < 4; i++) {
 			if (tr[i].intersect(ray_begin, ray_direct, ttmp)) {
-				if (ttmp < tmin) {
+				if (ttmp > 0 && ttmp < tmin) {
 					tmin = ttmp;
 					triang = i;
 				}
@@ -40,6 +40,7 @@ public:
 		if (ray_direct * normal > 0) {
 			normal = normal * (-1);
 		}
+		intersection = ray_begin + ray_direct * t;
 		return true;
 	}
 private:
