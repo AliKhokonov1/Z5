@@ -34,15 +34,15 @@ struct VecPoint {
 	}
 	VecPoint operator-(const VecPoint& f) {
 		VecPoint s;
-		s.x = f.x - x;
-		s.y = f.y - y;
-		s.z = f.z - z;
+		s.x = x - f.x;
+		s.y = y - f.y;
+		s.z = z - f.z;
 		return s;
 	}
 	double lenght() {
 		return std::sqrt(x * x + y * y + z * z);
 	}
 	double operator*(const VecPoint& a) {
-		return x * a.x + y * a.y + z * a.z;
+		return (x * a.x) + (y * a.y) + (z * a.z);
 	}
 };

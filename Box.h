@@ -11,13 +11,13 @@ public:
 		color[1] = 255;
 		color[2] = 0;
 	}
-	bool intersect(VecPoint ray_begin, VecPoint ray_direct, double& t, VecPoint& normal, double screen, double limit) override {
+	bool intersect(VecPoint ray_begin, VecPoint ray_direct, double& t, VecPoint& normal, double screen, double limit, VecPoint& intersection) override {
 		double t_near = DBL_MIN;
 		double t_far = DBL_MAX;
 		double t1, t2;
 		double eps = 1e-10;
 		VecPoint N;
-		for (int i = 0; i < 3; i++){
+		for (int i = 0; i < 3; i++) {
 			if (fabs(ray_direct[i]) >= eps) {
 				t1 = (min[i] - ray_begin[i]) / ray_direct[i];
 				t2 = (max[i] - ray_begin[i]) / ray_direct[i];
@@ -52,13 +52,18 @@ public:
 					return false;
 				}
 			}
-			//
+			else {
+				if (ray_begin[i] < min[i] || ray_begin[i] > max[i])
+					return false;
+			}
 		}
 		if (t_near <= t_far && t_far >= 0) {
+			t = t_near;
 			normal = N;
-			if (((ray_direct.x * normal.x) + (ray_direct.y * normal.y) + (ray_direct.z * normal.z)) > 0) {
+			if (ray_direct * normal > 0) {
 				normal = normal * (-1);
 			}
+			intersection = ray_begin + ray_direct * t;
 			return true;
 		}
 		else {
