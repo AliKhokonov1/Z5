@@ -41,9 +41,7 @@ public:
 		if (ray_direct * normal > 0) {
 			normal = normal * (-1);
 		}
-		//printf("%lf%lf%lf\n", normal.x, normal.y, normal.z);
 		intersection = ray_begin + ray_direct * t;
-		//printf("%lf %lf %lf \n", intersection.x, intersection.y, intersection.z);
 		return true;
 	}
 private:

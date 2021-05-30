@@ -27,12 +27,10 @@ public:
             return false;
         }
         u = detu / det;
-        //printf("u=%lf\n", u);
         if (u < 0.0 || u > 1.0) {
             return false;
         }
         v = detv / det;
-        //printf("v=%lf\n", v);
         if (v < 0.0 || u + v > 1.0) {
             return false;
         }

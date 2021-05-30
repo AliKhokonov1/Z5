@@ -2,14 +2,7 @@
 #include <cmath>
 #include <algorithm>
 #include <iostream>
-
 #include "Shape.h"
-
-void print_v(VecPoint v) // Prints vector / point
-{
-	std::cout << "[" << v.x << ", " << v.y << ", " << v.z << "]" << std::endl;
-}
-
 class Sphere :public Shape {
 public:
 	Sphere(double rad, VecPoint centre) :radius(rad) {

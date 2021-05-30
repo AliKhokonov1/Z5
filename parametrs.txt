@@ -1,0 +1,9 @@
+cam 0.0 0.0 0.0
+normal 1.0 0.0 0.0
+up 0.0 0.0 1.0
+light 120.0 30.0 50.0
+screen 50.0
+limit 2000.0
+alpha 2.0
+width 2000.0
+height 1800.0
