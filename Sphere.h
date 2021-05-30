@@ -41,6 +41,9 @@ public:
 		intersection = ray_begin + ray_direct * t;
 		normal = (intersection - centre);
 		normal = (normal) * (1 / normal.lenght());
+		if (ray_direct * normal > 0) {
+			normal = normal * (-1);
+		}
 		return true;
 	}
 private:

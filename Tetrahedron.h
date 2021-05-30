@@ -36,11 +36,14 @@ public:
 		normal.x = (tr[triang].p1 - tr[triang].p0).y * (tr[triang].p2 - tr[triang].p0).z - (tr[triang].p1 - tr[triang].p0).z * (tr[triang].p2 - tr[triang].p0).y;
 		normal.y = (tr[triang].p1 - tr[triang].p0).z * (tr[triang].p2 - tr[triang].p0).x - (tr[triang].p1 - tr[triang].p0).x * (tr[triang].p2 - tr[triang].p0).z;
 		normal.z = (tr[triang].p1 - tr[triang].p0).x * (tr[triang].p2 - tr[triang].p0).y - (tr[triang].p1 - tr[triang].p0).y * (tr[triang].p2 - tr[triang].p0).x;
+		normal = (normal) * (1 / normal.lenght());
 		t = tmin;
 		if (ray_direct * normal > 0) {
 			normal = normal * (-1);
 		}
+		//printf("%lf%lf%lf\n", normal.x, normal.y, normal.z);
 		intersection = ray_begin + ray_direct * t;
+		//printf("%lf %lf %lf \n", intersection.x, intersection.y, intersection.z);
 		return true;
 	}
 private:

@@ -1,5 +1,4 @@
 
-
 #include "VecPoint.h"
 #include "Shape.h"
 #include "CImg.h" 
@@ -70,21 +69,27 @@ void render(VecPoint cam, VecPoint normal, VecPoint up, double screen, double li
 				image(i, j, 2) = 0;
 			}
 			else {
-
-				VecPoint light_vector = light - intersection;
-				light_vector = light_vector * (1 / light_vector.lenght());
-
-				// Angle cosinus:
-				double light_coef = light_vector * N;
-				if (light_coef <= 0) light_coef = 0;
-
-				int R = static_cast<int>(obj->color[0] * light_coef);
-				int G = static_cast<int>(obj->color[1] * light_coef);
-				int B = static_cast<int>(obj->color[2] * light_coef);
-
-				image(i, j, 0) = static_cast<unsigned char>(R);
-				image(i, j, 1) = static_cast<unsigned char>(G);
-				image(i, j, 2) = static_cast<unsigned char>(B);
+				N = N * (1 / N.lenght());
+				L = (light - (ray_direction * tmin + ray_begin));
+				L = L * (1 / L.lenght());
+				NL = N * L;
+				if (NL < 0) {
+					NL = 0.0;
+				}
+				for (int k = 0; k < 3; k++) {
+					ambient[k] = (0.2 * (obj->color[k]));
+				}
+				for (int k = 0; k < 3; k++) {
+					diffuse[k] = (0.8 * NL * (obj->color[k]));
+				}
+				for (int k = 0; k < 3; k++) {
+					color[k] = ambient[k] + diffuse[k];
+					if (color[k] > 255) { color[k] = 255; }
+					if (color[k] < 0) { color[k] = 0; }
+				}
+				for (int k = 0; k < 3; k++) {
+					image(i, j, k) = static_cast<unsigned char>(color[k]);
+				}
 			}
 			curr_point = curr_point - sideways;
 		}
