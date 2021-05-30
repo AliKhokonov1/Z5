@@ -88,5 +88,6 @@ void render(VecPoint cam, VecPoint normal, VecPoint up, double screen, double li
 		int elapsed_s = static_cast<int>(std::chrono::duration_cast<std::chrono::milliseconds>(end_t - start_t).count());
 		printf("render time = %d milliseconds\n", elapsed_s);
 		image.normalize(0, 255);
+		image.save("Hohol.bmp");
 		image.display("Hohol");
 }
